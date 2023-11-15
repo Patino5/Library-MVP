@@ -21,17 +21,18 @@ app.use(express.static('public'))
 
 
 // Get all books
-app.get('api/books', async (req, res) => {
+app.get('/api/books', async (req, res) => {
     try {
         const { rows } = await pool.query(`SELECT * FROM books;`)
         res.send({rows}).status(200)
+        console.log({rows});
     } catch {
         console.error(error.message)
         res.status(500).json({error: error.message})    }
 })
 
 // Get one book 
-app.get('api/books/:id', async (req, res) => {
+app.get('/api/books/:id', async (req, res) => {
     try{
         const { id } = req.params
         const { rows } = await pool.query(`SELECT * FROM books WHERE id = ${id}`)
