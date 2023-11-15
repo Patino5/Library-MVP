@@ -1,2 +1,1 @@
-# fantastic-potato
-practice deploying on render
+# Personal Library
