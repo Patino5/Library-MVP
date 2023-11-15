@@ -48,11 +48,28 @@ app.get('api/books/:id', async (req, res) => {
     }
 })
 
-// Create one 
+// Create a book
+app.post('/api/books', async (req, res) => {
+    try {
+        const {title, author, rating, status} = req.body
+        const { rows } = await pool.query(`INSERT INTO books (title, author, rating, status)
+        VALUES ('${title}', '${author}', ${rating}, '${status}') RETURNING *;`)
+        res.status(201).json(rows[0])
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).json({error: error.message})
+    }
+})
 
-// Update one 
+// Update a book
+app.put('/api/books/:id', async (req, res) => {
 
-// Delete one 
+})
+
+// Delete a book
+app.delete('/api/books/:id', async (req, res) => {
+
+}) 
 
 // Listener
 app.listen(process.env.PORT, () => {
