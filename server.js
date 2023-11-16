@@ -63,15 +63,42 @@ app.post('/api/books', async (req, res) => {
 
 // Update a book
 app.put('/api/books/:id', async (req, res) => {
-
-})
+    try {
+      const { id } = req.params
+      const { title, author, rating, status } = req.body
+      const { rows } = await pool.query(
+        `UPDATE books SET title = '${title}', author = '${author}', rating = ${rating}, status = '${status}' WHERE id = ${id} RETURNING *;`)
+  
+      if (rows.length === 1) {
+        res.status(200).json(rows)
+      } else {
+        res.status(404).json({ error: 'Not Found' })
+      }
+    } catch (error) {
+      console.error(error.message)
+      res.status(500).json({ error: error.message })
+    }
+  })
 
 // Delete a book
 app.delete('/api/books/:id', async (req, res) => {
-
-}) 
+    try {
+      const { id } = req.params;
+      const { rows } = await pool.query(`DELETE FROM books WHERE id = ${id} RETURNING *;`)
+  
+      if (rows.length === 1) {
+        res.status(200).json(rows)
+      } else {
+        res.status(404).json({ error: 'Not Found' })
+      }
+    } catch (error) {
+      console.error(error.message)
+      res.status(500).json({ error: error.message })
+    }
+  })
+  
 
 // Listener
 app.listen(process.env.PORT, () => {
-    console.log(`Working on ${PORT}`);
+    console.log(`Working on ${PORT}`)
 })
