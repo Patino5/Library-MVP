@@ -1,6 +1,8 @@
+
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
 }
 
 header {
@@ -8,13 +10,42 @@ header {
     background-color: #050730;
     color: #fff;
 }
-h1 {
-    color: #050730;
-    margin: auto;
-}
+
 .hero {
-    height: 50vh;
+    height: 80vh;
     border-bottom: .2em solid #050730;
     display: flex;
+    justify-content: space-around;
     align-items: center;
+}
+
+.display-books {
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    justify-content: center;
+    align-content: stretch;
+}
+
+.book-card {
+    border: 1px solid blue;
+    padding: .5em;
+    margin: .5em auto;
+    width: 95%;
+}
+
+.btn-container {
+    display: flex;
+    width: 95%;
+    border: 1px solid green;
+    padding: .5em;
+    margin: auto;
+    justify-content: center;
+}
+
+button {
+    padding: .5em;
+    border-radius: 1em;
+    margin: .5em;
 }
