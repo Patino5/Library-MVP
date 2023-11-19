@@ -1,5 +1,6 @@
 
 console.log('working');
+const addBook = document.querySelector('#bookForm')
 
 fetch('/api/books')
     .then((res) => res.json())
@@ -70,15 +71,15 @@ fetch('/api/books')
 
 async function displayBooks(arr) {
     const div = document.querySelector('#books');
-    console.log(`displayBooks(${arr.rows})`);
-    await arr.forEach(book => {
-        console.log(`forEach method: ${book}`);
+    console.log(`displayBooks(${arr})`);
+    await arr.forEach(elem => {
+        console.log(`forEach method: ${elem}`);
         const card = document.createElement('div');
         card.classList.add('book-card');
         
-        card.appendChild(bookCard(book));
+        card.appendChild(bookCard(elem));
 
-        const btnContainerElement = btnContainer();
+        const btnContainerElement = btnContainer(elem.id);
         card.appendChild(btnContainerElement);
         
         div.appendChild(card);
@@ -95,7 +96,7 @@ function btnContainer(book) {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
-    deleteBtn.addEventListener('click', () => removeBook(book.id))
+    deleteBtn.addEventListener('click', () => removeBook(id))
 
     btnContainer.appendChild(updateBtn);
     btnContainer.appendChild(deleteBtn);
@@ -113,6 +114,7 @@ function openUpdateForm(book) {
     toggleModal()
 }
 
+// Delete book
 async function removeBook(bookId) {
     try {
         const res = await fetch(`api/books/${bookId}`, {
@@ -128,6 +130,7 @@ async function removeBook(bookId) {
     }
 }
 
+// creates the information for the book card
 function bookCard(obj) {
     const { title, author, rating, status } = obj
     const bookCard = document.createElement('div')
@@ -138,25 +141,29 @@ function bookCard(obj) {
     return bookCard
 }
 
+// Show form to add book
 function toggleModal() {
     const modal = document.querySelector('#addBook')
     modal.classList.toggle('modal');
   }
   
+// Adding a new book 
   const addBookBtn = document.querySelector('#c2aBtn')
   
   addBookBtn.addEventListener('click', toggleModal)
 
-  async function submitForm() {
-    const title = document.getElementById('title').value
-    const author = document.getElementById('author').value
-    const rating = document.getElementById('rating').value
-    const status = document.getElementById('status').value
-  
+  bookForm.addEventListener('submit', async function(event){
+    event.preventDefault();
+    const formData = {
+        title: document.querySelector('#title').value,
+        author: document.querySelector('#author').value,
+        rating: document.querySelector('#rating').value,
+        status: document.querySelector('#status').value
+    }
     const newBook = { title, author, rating, status };
   
     try {
-      const response = await fetch('/api/books', {
+      const res = await fetch('/api/books', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -164,7 +171,7 @@ function toggleModal() {
         body: JSON.stringify(newBook),
       })
   
-      if (response.ok) {
+      if (res.ok) {
         location.reload();
       } else {
         console.error('Failed to add book')
@@ -172,9 +179,6 @@ function toggleModal() {
     } catch (error) {
       console.error(error.message)
     }
-  }
-  
-  const formSubmitBtn = document.querySelector('#formSubmitBtn')
-  formSubmitBtn.addEventListener('click', submitForm);
+  })
 
 //   displayBooks(books)
