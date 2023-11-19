@@ -73,7 +73,7 @@ async function displayBooks(arr) {
     const div = document.querySelector('#books');
     console.log(`displayBooks(${arr})`);
     await arr.forEach(elem => {
-        console.log(`forEach method: ${elem}`);
+        console.log(`forEach method: ${elem.id}`);
         const card = document.createElement('div');
         card.classList.add('book-card');
         
