@@ -86,17 +86,17 @@ async function displayBooks(arr) {
     });
 }
 
-function btnContainer(book) {
+function btnContainer(bookId) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
-    updateBtn.addEventListener('click', () => openUpdateForm(book))
+    updateBtn.addEventListener('click', () => openUpdateForm(bookId))
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
-    deleteBtn.addEventListener('click', () => removeBook(id))
+    deleteBtn.addEventListener('click', () => removeBook(bookId))
 
     btnContainer.appendChild(updateBtn);
     btnContainer.appendChild(deleteBtn);
@@ -104,8 +104,8 @@ function btnContainer(book) {
     return btnContainer;
 }
 
-function openUpdateForm(book) {
-    console.log(`openUpdateForm book: ${book}`);
+function openUpdateForm(bookId) {
+    console.log(`openUpdateForm book: ${bookId}`);
     document.querySelector('#title').value = book.title
     document.querySelector('#author').value = book.author
     document.querySelector('#rating').value = book.rating
@@ -116,6 +116,7 @@ function openUpdateForm(book) {
 
 // Delete book
 async function removeBook(bookId) {
+    console.log(`removeBook f(x): bookId = ${bookId}`);
     try {
         const res = await fetch(`api/books/${bookId}`, {
             method: 'DELETE',
