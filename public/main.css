@@ -5,6 +5,11 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     scroll-behavior: smooth;
+    --offWhite: #f9ebe0;
+    --dimGray: #636564;
+    --primaryColor: #050730;
+    --secondaryColor: #6b0504;
+    --ashGray: #b5c2b7;
 }
 
 header {
@@ -19,14 +24,35 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
 }
 
 .hero h1 {
-    font-size: rem;
+    font-size: 4.5rem;    
 }
 
-#c2aBtn {
+.hero p {
+    font-size: 1.5rem;
+}
+
+.hero h1, p {
+    color:var(--offWhite);
+    background-color: rgba(47, 47, 47, 0.6);
+    /* -webkit-text-stroke: 1px #000;
+    text-stroke: 1px #000; */
+    padding: 0 1.5rem
+}
+
+#callToAction {
     align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: 10em;
+    display: inline;
+    background-color: #6b0504;
+    color: var(--offWhite);
+    /* text-shadow: ; */
+    padding: 1em;
+    border-radius: 1em;
 }
 
 .display-books {
@@ -74,7 +100,7 @@ button {
   } */
 
   /* TEST FOR MODAL */
-
+/* 
 .modal {
     font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
   }
@@ -174,6 +200,8 @@ button {
   /**************************\
     Demo Animation Style
   \**************************/
+
+/*   
   @keyframes mmfadeIn {
       from { opacity: 0; }
         to { opacity: 1; }
@@ -221,4 +249,4 @@ button {
   .micromodal-slide .modal__container,
   .micromodal-slide .modal__overlay {
     will-change: transform;
-  }
+  }  */
