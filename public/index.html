@@ -13,12 +13,18 @@
 <body>
     <!--   Header Section -->
     <header>
-        <h3 id="title">Personal Library</h1>
+        <h2 id="title">Personal Library</h1>
     </header>
 
     <!--   Hero Section   -->
     <div class="hero">
-        <h1 id="hero-title">BUILD YOUR LIBRARY</h1>
+        <div id="heroInfo">
+            <h1 id="hero-title">BUILD YOUR LIBRARY</h1>
+            <p>Organize, Explore, and Share Your Personal Library</p>
+        </div>
+        <div id="callToAction">
+            <div class="btn" id="c2aBtn">Add Your First Book</div>
+        </div>
     </div>
 
     <!--   Main Section   -->
@@ -41,7 +47,8 @@
                 <input type="number" id="rating" name="rating" min="1" max="5" required>
 
                 <label for="status">Status:</label>
-                <input type="text" id="status" name="status" required>
+                <input type="text" id="status" name="status" placeholder="read/unread
+                ">
 
                 <button type="button" onclick="submitForm()">Add Book</button>
             </form>
