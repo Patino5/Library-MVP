@@ -50,6 +50,7 @@ header {
     display: inline;
     background-color: #6b0504;
     color: var(--offWhite);
+    font-size: 1.4em;
     /* text-shadow: ; */
     padding: 1em;
     border-radius: 1em;
