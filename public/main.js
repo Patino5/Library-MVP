@@ -89,13 +89,39 @@ function btnContainer() {
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
+    updateBtn.addEventListener('click', () => openUpdateForm(obj))
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
+    deleteBtn.addEventListener('click', () => removeBook(id))
 
     btnContainer.appendChild(updateBtn);
     btnContainer.appendChild(deleteBtn);
 
     return btnContainer;
+}
+
+function openUpdateForm(book) {
+    document.querySelector('#title').value = book.title
+    document.querySelector('#author').value = book.author
+    document.querySelector('#rating').value = book.rating
+    document.querySelector('#status').value = book.status
+
+    toggleModal()
+}
+
+async function removeBook(bookId) {
+    try {
+        const res = await fetch(`api/books/${bookID}`, {
+            method: 'DELETE',
+        })
+        if (res.ok) {
+            location.reload()
+        } else {
+            console.error('Failed to remove book')
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 function bookCard(obj) {
@@ -109,7 +135,7 @@ function bookCard(obj) {
 }
 
 function toggleModal() {
-    const modal = document.getElementById('addBook')
+    const modal = document.querySelector('#addBook')
     modal.classList.toggle('modal-active');
   }
   
@@ -146,3 +172,5 @@ function toggleModal() {
   
   const formSubmitBtn = document.querySelector('#formSubmitBtn')
   formSubmitBtn.addEventListener('click', submitForm);
+
+//   displayBooks(books)
