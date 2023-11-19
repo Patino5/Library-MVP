@@ -90,6 +90,7 @@ button {
     padding: .5em;
     border-radius: 1em;
     margin: .5em;
+    cursor: pointer;
 }
 
 .modal {
@@ -119,8 +120,4 @@ button {
   
   .modal-active {
     display: block;
-  }
-
-  button {
-    cursor: pointer;
   }

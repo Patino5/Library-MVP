@@ -69,8 +69,9 @@ fetch('/api/books')
 
 async function displayBooks(arr) {
     const div = document.querySelector('#books');
-
+    console.log(`displayBooks(${arr})`);
     await arr.forEach(book => {
+        console.log(`forEach method: ${book}`);
         const card = document.createElement('div');
         card.classList.add('book-card');
         
@@ -102,6 +103,7 @@ function btnContainer(book) {
 }
 
 function openUpdateForm(book) {
+    console.log(`openUpdateForm book: ${book}`);
     document.querySelector('#title').value = book.title
     document.querySelector('#author').value = book.author
     document.querySelector('#rating').value = book.rating
