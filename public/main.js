@@ -4,7 +4,7 @@ console.log('working');
 fetch('/api/books')
     .then((res) => res.json())
     .then((data) => {
-        console.log(`book data`)
+        console.log(data)
     }) 
 
 // const books = [
