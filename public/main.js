@@ -4,7 +4,8 @@ console.log('working');
 fetch('/api/books')
     .then((res) => res.json())
     .then((data) => {
-        console.log(data)
+        console.log(data.rows)
+        displayBooks(data.rows);
     }) 
 
 // const books = [
@@ -107,4 +108,3 @@ function bookCard(obj) {
     return bookCard;
 }
 
-displayBooks(books);
