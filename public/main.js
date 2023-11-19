@@ -5,7 +5,7 @@ fetch('/api/books')
     .then((res) => res.json())
     .then((data) => {
         console.log(data.rows)
-        displayBooks(data.rows);
+        displayBooks(data.rows)
     }) 
 
 // const books = [
@@ -99,21 +99,50 @@ function btnContainer() {
 }
 
 function bookCard(obj) {
-    const { title, author, rating, status } = obj;
-    const bookCard = document.createElement('div');
-    bookCard.classList.add('book-info'); 
+    const { title, author, rating, status } = obj
+    const bookCard = document.createElement('div')
+    bookCard.classList.add('book-info') 
 
     bookCard.innerHTML = `<h1>${title}</h1> <p>Author: ${author}</p> <p>Rating: ${rating}</p><p> Status: ${status}</p>`;
 
-    return bookCard;
+    return bookCard
 }
 
-// const addBookBtn = document.querySelector('#c2aBtn')
+function toggleModal() {
+    const modal = document.getElementById('addBook')
+    modal.classList.toggle('modal-active');
+  }
+  
+  const addBookBtn = document.querySelector('#c2aBtn')
+  
+  addBookBtn.addEventListener('click', toggleModal)
 
-// addBookBtn.addEventListener('click', openBookForm())
-
-// openBookForm(){
-
-// }
-
-// displayBooks(books)
+  async function submitForm() {
+    const title = document.getElementById('title').value
+    const author = document.getElementById('author').value
+    const rating = document.getElementById('rating').value
+    const status = document.getElementById('status').value
+  
+    const newBook = { title, author, rating, status };
+  
+    try {
+      const response = await fetch('/api/books', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newBook),
+      })
+  
+      if (response.ok) {
+        location.reload();
+      } else {
+        console.error('Failed to add book')
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+  
+  const formSubmitBtn = document.querySelector('#formSubmitBtn')
+  formSubmitBtn.addEventListener('click', submitForm);
