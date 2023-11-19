@@ -70,7 +70,7 @@ fetch('/api/books')
 
 async function displayBooks(arr) {
     const div = document.querySelector('#books');
-    console.log(`displayBooks(${arr})`);
+    console.log(`displayBooks(${arr.rows})`);
     await arr.forEach(book => {
         console.log(`forEach method: ${book}`);
         const card = document.createElement('div');
