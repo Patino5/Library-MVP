@@ -1,9 +1,10 @@
+
 console.log('working');
 
 fetch('/api/books')
     .then((res) => res.json())
     .then((data) => {
-        console.log(`book data ${data}`)
+        console.log(`book data`)
     }) 
 
 // const books = [
@@ -65,10 +66,10 @@ fetch('/api/books')
 //         },
 // ]
 
-function displayBooks(arr) {
+async function displayBooks(arr) {
     const div = document.querySelector('#books');
 
-    arr.forEach(book => {
+    await arr.forEach(book => {
         const card = document.createElement('div');
         card.classList.add('book-card');
         
