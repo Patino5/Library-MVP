@@ -60,29 +60,29 @@ header {
     width: 100vw;
     display: flex;
     flex-wrap: wrap;
-    background-color: f9ebe0;
+    background-color: var(--offWhite);
     justify-content: center;
     align-content: stretch;
 }
 
 .book-card {
-    border: .3em solid #6b0504;
+    border: .3em solid var(--secondaryColor);
     padding: 2.5em;
     margin: .5em auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 45%;
-    height: 27em
+    width: calc(45% - 2em);
+    height: 27em;
+    background-color: var(--offWhite);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
 }
 
 .btn-container {
     display: flex;
     width: 95%;
-    border: 1px solid green;
     padding: .5em;
-    
     justify-content: center;
 }
 
@@ -91,6 +91,14 @@ button {
     border-radius: 1em;
     margin: .5em;
     cursor: pointer;
+    background-color: var(--secondaryColor);
+    color: var(--offWhite);
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #850400;
 }
 
 .modal {
@@ -104,12 +112,37 @@ button {
   }
   
   .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    width: 80%;
-    max-width: 400px;
-    margin: 15% auto;
+    background-color: var(--offWhite);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
   }
+
+  label {
+    font-weight: bold;
+    margin-bottom: .5em;
+  }
+
+  input {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: .3em;
+    margin-bottom: 1em; 
+  }
+
+  button#formSubmitBtn {
+    background-color: var(--secondaryColor);
+    color: var(--offWhite);
+    border: none;
+    padding: 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#formSubmitBtn:hover {
+    background-color: #850400;
+}
   
   .close {
     cursor: pointer;
