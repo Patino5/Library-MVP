@@ -108,3 +108,12 @@ function bookCard(obj) {
     return bookCard;
 }
 
+// const addBookBtn = document.querySelector('#c2aBtn')
+
+// addBookBtn.addEventListener('click', openBookForm())
+
+// openBookForm(){
+
+// }
+
+// displayBooks(books)
