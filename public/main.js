@@ -83,16 +83,17 @@ async function displayBooks(arr) {
     });
 }
 
-function btnContainer() {
+function btnContainer(book) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
-    updateBtn.addEventListener('click', () => openUpdateForm(obj))
+    updateBtn.addEventListener('click', () => openUpdateForm(book))
+
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
-    deleteBtn.addEventListener('click', () => removeBook(id))
+    deleteBtn.addEventListener('click', () => removeBook(book.id))
 
     btnContainer.appendChild(updateBtn);
     btnContainer.appendChild(deleteBtn);
@@ -111,7 +112,7 @@ function openUpdateForm(book) {
 
 async function removeBook(bookId) {
     try {
-        const res = await fetch(`api/books/${bookID}`, {
+        const res = await fetch(`api/books/${bookId}`, {
             method: 'DELETE',
         })
         if (res.ok) {
@@ -136,7 +137,7 @@ function bookCard(obj) {
 
 function toggleModal() {
     const modal = document.querySelector('#addBook')
-    modal.classList.toggle('modal-active');
+    modal.classList.toggle('modal');
   }
   
   const addBookBtn = document.querySelector('#c2aBtn')
