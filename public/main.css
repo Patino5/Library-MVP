@@ -119,3 +119,7 @@ button {
   .modal-active {
     display: block;
   }
+
+  button {
+    cursor: pointer;
+  }
