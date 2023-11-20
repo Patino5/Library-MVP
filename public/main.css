@@ -114,6 +114,15 @@ li:hover {
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
 }
 
+.book-info h1 {
+    margin-bottom: .5em;
+    color: var(--primaryColor);
+}
+
+.book-info p {
+    padding: .2em 0 .2em 0;
+}
+
 .btn-container {
     display: flex;
     width: 95%;

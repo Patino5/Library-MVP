@@ -92,11 +92,11 @@ async function displayBooks(arr) {
 function btnContainer(book) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
-
+    // update btn
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
     updateBtn.addEventListener('click', () => openUpdateForm(book))
-
+    // delete btn
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
     deleteBtn.addEventListener('click', () => removeBook(book.id))
@@ -113,7 +113,7 @@ function bookCard(obj) {
     const { title, author, rating, status } = obj
     const bookCard = document.createElement('div')
     bookCard.classList.add('book-info') 
-
+    // book information displayed
     bookCard.innerHTML = `<h1>${title}</h1> <p>Author: ${author}</p> <p>Rating: ${rating}</p><p> Status: ${status}</p>`;
 
     return bookCard
@@ -169,6 +169,7 @@ function openUpdateForm(book) {
     document.querySelector('#rating').value = book.rating
     document.querySelector('#status').value = book.status
 
+    
     toggleModal()
 }
 
