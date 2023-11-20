@@ -167,7 +167,7 @@ function toggleModal() {
         status: document.querySelector('#status').value
     }
     // const { title, author, rating, status } = formData;
-  
+    console.log(formData);  
     try {
       const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
         method: 'POST',
