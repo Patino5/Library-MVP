@@ -179,6 +179,7 @@ function toggleModal() {
   
       if (res.ok) {
         location.reload();
+        console.log('book added');
       } else {
         console.error('Failed to add book')
       }
