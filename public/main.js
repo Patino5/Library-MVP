@@ -122,7 +122,12 @@ function bookCard(obj) {
 // Show form to add book
 function toggleModal() {
     const modal = document.querySelector('#addBook')
-    modal.classList.toggle('modal');
+    modal.classList.toggle('modal-active');
+
+    if (modal.classList.contains('modal-active')) {
+        // Scroll to the modal when it opens
+        modal.scrollIntoView({ behavior: 'smooth' });
+    }
 }
   
 // Adding a new book 

@@ -5,7 +5,7 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     scroll-behavior: smooth;
-    --offWhite: #f9ebe0;
+    --offWhite: #faf0e6;
     --dimGray: #636564;
     --primaryColor: #050730;
     --secondaryColor: #6b0504;
@@ -95,20 +95,22 @@ li:hover {
     width: 100vw;
     display: flex;
     flex-wrap: wrap;
-    background-color: var(--offWhite);
-    justify-content: center;
-    align-content: stretch;
+    background-color: var(--ashGray);
+    justify-content: space-around;
+    align-content: flex-start; 
+    padding: 2em;
 }
 
 .book-card {
     border: .3em solid var(--primaryColor);
     padding: 2.5em;
-    margin: .5em auto;
+    margin: 1em; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     width: calc(45% - 2em);
+    max-width: 300px; 
     height: 27em;
     background-color: var(--offWhite);
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
@@ -116,20 +118,22 @@ li:hover {
 
 .book-info h1 {
     margin-bottom: .5em;
-    width: 80%;
+    width: 100%;
     color: var(--primaryColor);
+    font-size: 1.5em;
 }
 
 .book-info p {
-    padding: .2em 0 .2em 0;
+    margin: .2em 0; 
 }
 
 .btn-container {
     display: flex;
-    width: 80%;
+    width: 100%; 
     padding: .5em;
-    justify-content: center;
+    justify-content: space-around; 
 }
+
 
 button {
     padding: .5em;
@@ -145,7 +149,6 @@ button {
 button, .btn:hover {
     background-color: #850400;
 }
-
 .modal {
     display: none;
     position: fixed;
@@ -154,30 +157,34 @@ button, .btn:hover {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background-color: var(--offWhite);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 3em;
     gap: 1em;
-  }
+    border: 2px solid var(--secondaryColor);
+    border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
-  label {
+label {
     font-weight: bold;
     margin-bottom: .5em;
-  }
+}
 
-  input {
+input {
     padding: 0.5em;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondaryColor);
     border-radius: .3em;
-    margin-bottom: 1em; 
-    margin-right: 1.4em;
-  }
+    margin-bottom: 1em;
+    width: 100%; /* Take up full width */
+}
 
-  button#formSubmitBtn {
+button#formSubmitBtn {
     background-color: var(--secondaryColor);
     color: var(--offWhite);
     border: none;
@@ -185,19 +192,23 @@ button, .btn:hover {
     border-radius: 0.5em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%; /* Take up full width */
 }
 
 button#formSubmitBtn:hover {
     background-color: #850400;
 }
-  
-  .close {
+
+.close {
     cursor: pointer;
     float: right;
     font-size: 20px;
     font-weight: bold;
-  }
-  
-  .modal-active {
-    display: block;
-  }
+    color: var(--secondaryColor);
+}
+
+.modal-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
