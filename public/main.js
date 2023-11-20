@@ -69,7 +69,6 @@ fetch('/api/books')
 //         },
 // ]
 
-
 // Show books if any in library curently
 async function displayBooks(arr) {
     const div = document.querySelector('#books');
