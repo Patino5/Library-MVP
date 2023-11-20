@@ -69,6 +69,7 @@ fetch('/api/books')
 //         },
 // ]
 
+
 // Show books if any in library curently
 async function displayBooks(arr) {
     const div = document.querySelector('#books');
@@ -88,17 +89,17 @@ async function displayBooks(arr) {
 }
 
 // creates button containers dynamically
-function btnContainer(obj) {
+function btnContainer(book) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
-    updateBtn.addEventListener('click', () => toggleModal('update', obj.id))
+    updateBtn.addEventListener('click', () => openUpdateForm(book))
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
-    deleteBtn.addEventListener('click', () => removeBook(obj.id))
+    deleteBtn.addEventListener('click', () => removeBook(book.id))
     
 
     btnContainer.appendChild(updateBtn);
@@ -119,88 +120,73 @@ function bookCard(obj) {
 }
 
 // Show form to add book
-function toggleModal(mode, bookId = null) {
-    const modal = document.querySelector('#addBook');
-    modal.classList.toggle('modal-active');
-
-    const formSubmitBtn = document.querySelector('#formSubmitBtn');
-    formSubmitBtn.dataset.mode = mode;
-    formSubmitBtn.dataset.id = bookId;
-
-    // Clear form fields if adding a new book
-    if (mode === 'add') {
-        document.getElementById('bookForm').reset();
-    }
+function toggleModal() {
+    const modal = document.querySelector('#addBook')
+    modal.classList.toggle('modal');
 }
-
   
 // Adding a new book 
 const addBookBtn = document.querySelector('#c2aBtn')
 const displayArea = document.querySelector('#books')
 
-addBookBtn.addEventListener('click', () => toggleModal('add'))
-async function submitForm() {
-    const title = document.getElementById('book-title').value;
-    const author = document.getElementById('book-author').value;
-    const rating = document.getElementById('book-rating').value;
-    const status = document.getElementById('book-status').value;
+addBookBtn.addEventListener('click', toggleModal)
 
-    const formSubmitBtn = document.querySelector('#formSubmitBtn');
-    const isUpdate = formSubmitBtn.dataset.mode === 'update';
-    const url = isUpdate ? `/api/books/${formSubmitBtn.dataset.id}` : '/api/books';
-
-    const method = isUpdate ? 'PUT' : 'POST';
-
-    const newBook = { title, author, rating, status };
-
-    try {
-        const response = await fetch(url, {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newBook),
-        });
-
-        if (response.ok) {
-            location.reload(); 
-        } else {
-            console.error('Failed to add/update book');
-        }
-    } catch (error) {
-        console.error(error.message);
-    }
+bookForm.addEventListener('submit', async function(event){
+event.preventDefault();
+const formData = {
+    title: document.querySelector('#title').value,
+    author: document.querySelector('#author').value,
+    rating: document.querySelector('#rating').value,
+    status: document.querySelector('#status').value
 }
+// const { title, author, rating, status } = formData;
+console.log(formData);  
+try {
+    const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+    })
 
+    if (res.ok) {
+    location.reload();
+    alert(`Book Added`);
+    } else {
+    alert('Failed to add book')
+    }
+} catch (error) {
+    console.error(error)
+}
+})
 
 // updateBook 
 function openUpdateForm(book) {
-    document.querySelector('#book-title').value = book.title;
-    document.querySelector('#book-author').value = book.author;
-    document.querySelector('#book-rating').value = book.rating;
-    document.querySelector('#book-status').value = book.status;
+    console.log(`openUpdateForm book: ${book}`);
+    document.querySelector('#title').value = book.title
+    document.querySelector('#author').value = book.author
+    document.querySelector('#rating').value = book.rating
+    document.querySelector('#status').value = book.status
 
-    toggleModal('update', book.id);
+    toggleModal()
 }
 
-
-// Delete Book Function 
+// Delete book
 async function removeBook(bookId) {
+    console.log(`removeBook f(x): bookId = ${bookId}`);
     try {
         const res = await fetch(`api/books/${bookId}`, {
             method: 'DELETE',
-        });
-
+        })
         if (res.ok) {
-            const bookCard = document.querySelector(`#book-${bookId}`);
-            bookCard.remove(); // Remove the book card from the DOM
+            location.reload()
         } else {
-            console.error('Failed to remove book');
+            console.log('Failed to remove book')
         }
     } catch (error) {
-        console.error(error.message);
+        console.error(error.message)
     }
 }
-
 
 //   displayBooks(books)
