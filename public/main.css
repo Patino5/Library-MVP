@@ -116,6 +116,7 @@ li:hover {
 
 .book-info h1 {
     margin-bottom: .5em;
+    width: 80%;
     color: var(--primaryColor);
 }
 
@@ -125,7 +126,7 @@ li:hover {
 
 .btn-container {
     display: flex;
-    width: 95%;
+    width: 80%;
     padding: .5em;
     justify-content: center;
 }
