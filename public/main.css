@@ -101,7 +101,7 @@ li:hover {
 }
 
 .book-card {
-    border: .3em solid var(--secondaryColor);
+    border: .3em solid var(--primaryColor);
     padding: 2.5em;
     margin: .5em auto;
     display: flex;
