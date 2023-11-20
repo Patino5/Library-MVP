@@ -81,7 +81,7 @@ async function displayBooks(arr) {
         
         card.appendChild(bookCard(elem));
 
-        const btnContainerElement = btnContainer(elem.id);
+        const btnContainerElement = btnContainer(elem);
         card.appendChild(btnContainerElement);
         
         div.appendChild(card);
@@ -89,17 +89,17 @@ async function displayBooks(arr) {
 }
 
 // creates button containers dynamically
-function btnContainer(bookId) {
+function btnContainer(book) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
-    updateBtn.addEventListener('click', () => openUpdateForm(bookId))
+    updateBtn.addEventListener('click', () => openUpdateForm(book))
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
-    deleteBtn.addEventListener('click', () => removeBook(bookId))
+    deleteBtn.addEventListener('click', () => removeBook(book.id))
     
 
     btnContainer.appendChild(updateBtn);
@@ -108,8 +108,8 @@ function btnContainer(bookId) {
     return btnContainer;
 }
 
-function openUpdateForm(bookId) {
-    console.log(`openUpdateForm book: ${bookId}`);
+function openUpdateForm(book) {
+    console.log(`openUpdateForm book: ${book}`);
     document.querySelector('#title').value = book.title
     document.querySelector('#author').value = book.author
     document.querySelector('#rating').value = book.rating
