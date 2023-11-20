@@ -108,6 +108,60 @@ function btnContainer(book) {
     return btnContainer;
 }
 
+// creates the information for the book card
+function bookCard(obj) {
+    const { title, author, rating, status } = obj
+    const bookCard = document.createElement('div')
+    bookCard.classList.add('book-info') 
+
+    bookCard.innerHTML = `<h1>${title}</h1> <p>Author: ${author}</p> <p>Rating: ${rating}</p><p> Status: ${status}</p>`;
+
+    return bookCard
+}
+
+// Show form to add book
+function toggleModal() {
+    const modal = document.querySelector('#addBook')
+    modal.classList.toggle('modal');
+}
+  
+// Adding a new book 
+const addBookBtn = document.querySelector('#c2aBtn')
+const displayArea = document.querySelector('#books')
+
+addBookBtn.addEventListener('click', toggleModal)
+
+bookForm.addEventListener('submit', async function(event){
+event.preventDefault();
+const formData = {
+    title: document.querySelector('#title').value,
+    author: document.querySelector('#author').value,
+    rating: document.querySelector('#rating').value,
+    status: document.querySelector('#status').value
+}
+// const { title, author, rating, status } = formData;
+console.log(formData);  
+try {
+    const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+    })
+
+    if (res.ok) {
+    location.reload();
+    alert(`Book Added`);
+    } else {
+    alert('Failed to add book')
+    }
+} catch (error) {
+    console.error(error)
+}
+})
+
+// updateBook 
 function openUpdateForm(book) {
     console.log(`openUpdateForm book: ${book}`);
     document.querySelector('#title').value = book.title
@@ -128,64 +182,11 @@ async function removeBook(bookId) {
         if (res.ok) {
             location.reload()
         } else {
-            console.error('Failed to remove book')
+            console.log('Failed to remove book')
         }
     } catch (error) {
         console.error(error.message)
     }
 }
-
-// creates the information for the book card
-function bookCard(obj) {
-    const { title, author, rating, status } = obj
-    const bookCard = document.createElement('div')
-    bookCard.classList.add('book-info') 
-
-    bookCard.innerHTML = `<h1>${title}</h1> <p>Author: ${author}</p> <p>Rating: ${rating}</p><p> Status: ${status}</p>`;
-
-    return bookCard
-}
-
-// Show form to add book
-function toggleModal() {
-    const modal = document.querySelector('#addBook')
-    modal.classList.toggle('modal');
-}
-  
-// Adding a new book 
-  const addBookBtn = document.querySelector('#c2aBtn')
-  const displayArea = document.querySelector('#books')
-  
-  addBookBtn.addEventListener('click', toggleModal)
-
-  bookForm.addEventListener('submit', async function(event){
-    event.preventDefault();
-    const formData = {
-        title: document.querySelector('#title').value,
-        author: document.querySelector('#author').value,
-        rating: document.querySelector('#rating').value,
-        status: document.querySelector('#status').value
-    }
-    // const { title, author, rating, status } = formData;
-    console.log(formData);  
-    try {
-      const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-  
-      if (res.ok) {
-        location.reload();
-        console.log('book added');
-      } else {
-        console.error('Failed to add book')
-      }
-    } catch (error) {
-      console.error(error.message)
-    }
-  })
 
 //   displayBooks(books)

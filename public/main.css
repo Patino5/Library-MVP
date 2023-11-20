@@ -15,7 +15,37 @@
 header {
     padding: 1em;
     background-color: #050730;
-    color: #fff;
+    color: var(--offWhite);
+    display: flex;
+    justify-content: space-between;
+}
+
+#first {
+    font-weight: 100;
+}
+
+header h1:hover {
+    transition: 300ms color ease;
+    color: var(--offWhite)
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+}
+
+li {
+    color: var(--offWhite);
+    margin: 0 2em;
+    font-size: 1.2rem;
+    transition: 500ms color ease;
+}
+
+li:hover {
+    cursor: pointer;
+    color:var(--secondaryColor);
 }
 
 .hero {
@@ -43,18 +73,23 @@ header {
     padding: 0 1.5rem
 }
 
-#callToAction {
+#c2aBtn {
     align-self: flex-end;
     cursor: pointer;
     margin-bottom: 9em;
     display: inline;
-    background-color: #6b0504;
+    background-color: var(--secondaryColor);
     color: var(--offWhite);
     font-size: 1.4em;
-    /* text-shadow: ; */
     padding: 1em;
     border-radius: 1em;
 }
+
+#c2aBtn:hover {
+    transition: 500ms background-color ease;
+    background-color: #850400;
+}
+
 
 .display-books {
     width: 100vw;
