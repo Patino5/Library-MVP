@@ -150,7 +150,7 @@ function bookCard(obj) {
 function toggleModal() {
     const modal = document.querySelector('#addBook')
     modal.classList.toggle('modal');
-  }
+}
   
 // Adding a new book 
   const addBookBtn = document.querySelector('#c2aBtn')
@@ -166,7 +166,7 @@ function toggleModal() {
         rating: document.querySelector('#rating').value,
         status: document.querySelector('#status').value
     }
-    const { title, author, rating, status } = formData;
+    // const { title, author, rating, status } = formData;
   
     try {
       const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
@@ -174,7 +174,7 @@ function toggleModal() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newBook),
+        body: JSON.stringify(formData),
       })
   
       if (res.ok) {
