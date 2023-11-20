@@ -163,8 +163,8 @@ try {
 
 // updateBook 
 function openUpdateForm(book) {
-    console.log(`openUpdateForm book: ${book}`);
-    document.querySelector('#title').value = book.title
+    console.log(`openUpdateForm book: ${book.id}`);
+    document.querySelector('#bookTitle').value = book.title
     document.querySelector('#author').value = book.author
     document.querySelector('#rating').value = book.rating
     document.querySelector('#status').value = book.status
