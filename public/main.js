@@ -69,6 +69,8 @@ fetch('/api/books')
 //         },
 // ]
 
+
+// Show books if any in library curently
 async function displayBooks(arr) {
     const div = document.querySelector('#books');
     console.log(`displayBooks(${arr})`);
@@ -86,6 +88,7 @@ async function displayBooks(arr) {
     });
 }
 
+// creates button containers dynamically
 function btnContainer(bookId) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
@@ -97,6 +100,7 @@ function btnContainer(bookId) {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
     deleteBtn.addEventListener('click', () => removeBook(bookId))
+    
 
     btnContainer.appendChild(updateBtn);
     btnContainer.appendChild(deleteBtn);
@@ -150,6 +154,7 @@ function toggleModal() {
   
 // Adding a new book 
   const addBookBtn = document.querySelector('#c2aBtn')
+  const displayArea = document.querySelector('#books')
   
   addBookBtn.addEventListener('click', toggleModal)
 
@@ -161,10 +166,10 @@ function toggleModal() {
         rating: document.querySelector('#rating').value,
         status: document.querySelector('#status').value
     }
-    const newBook = { title, author, rating, status };
+    const { title, author, rating, status } = formData;
   
     try {
-      const res = await fetch('/api/books', {
+      const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
