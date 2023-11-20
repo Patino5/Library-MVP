@@ -114,7 +114,8 @@ button, .btn:hover {
   .modal-content {
     background-color: var(--offWhite);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding: 3em;
     gap: 1em;
   }
 
@@ -128,6 +129,7 @@ button, .btn:hover {
     border: 1px solid #ccc;
     border-radius: .3em;
     margin-bottom: 1em; 
+    margin-right: 1.4em;
   }
 
   button#formSubmitBtn {
