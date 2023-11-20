@@ -88,17 +88,17 @@ async function displayBooks(arr) {
 }
 
 // creates button containers dynamically
-function btnContainer(book) {
+function btnContainer(obj) {
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container'); 
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update Book';
-    updateBtn.addEventListener('click', () => openUpdateForm(book))
+    updateBtn.addEventListener('click', () => toggleModal('update', obj.id))
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Remove Book';
-    deleteBtn.addEventListener('click', () => removeBook(book.id))
+    deleteBtn.addEventListener('click', () => removeBook(obj.id))
     
 
     btnContainer.appendChild(updateBtn);
@@ -119,73 +119,88 @@ function bookCard(obj) {
 }
 
 // Show form to add book
-function toggleModal() {
-    const modal = document.querySelector('#addBook')
-    modal.classList.toggle('modal');
+function toggleModal(mode, bookId = null) {
+    const modal = document.querySelector('#addBook');
+    modal.classList.toggle('modal-active');
+
+    const formSubmitBtn = document.querySelector('#formSubmitBtn');
+    formSubmitBtn.dataset.mode = mode;
+    formSubmitBtn.dataset.id = bookId;
+
+    // Clear form fields if adding a new book
+    if (mode === 'add') {
+        document.getElementById('bookForm').reset();
+    }
 }
+
   
 // Adding a new book 
 const addBookBtn = document.querySelector('#c2aBtn')
 const displayArea = document.querySelector('#books')
 
-addBookBtn.addEventListener('click', toggleModal)
+addBookBtn.addEventListener('click', () => toggleModal('add'))
+async function submitForm() {
+    const title = document.getElementById('book-title').value;
+    const author = document.getElementById('book-author').value;
+    const rating = document.getElementById('book-rating').value;
+    const status = document.getElementById('book-status').value;
 
-bookForm.addEventListener('submit', async function(event){
-event.preventDefault();
-const formData = {
-    title: document.querySelector('#title').value,
-    author: document.querySelector('#author').value,
-    rating: document.querySelector('#rating').value,
-    status: document.querySelector('#status').value
-}
-// const { title, author, rating, status } = formData;
-console.log(formData);  
-try {
-    const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-    })
+    const formSubmitBtn = document.querySelector('#formSubmitBtn');
+    const isUpdate = formSubmitBtn.dataset.mode === 'update';
+    const url = isUpdate ? `/api/books/${formSubmitBtn.dataset.id}` : '/api/books';
 
-    if (res.ok) {
-    location.reload();
-    alert(`Book Added`);
-    } else {
-    alert('Failed to add book')
+    const method = isUpdate ? 'PUT' : 'POST';
+
+    const newBook = { title, author, rating, status };
+
+    try {
+        const response = await fetch(url, {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newBook),
+        });
+
+        if (response.ok) {
+            location.reload(); 
+        } else {
+            console.error('Failed to add/update book');
+        }
+    } catch (error) {
+        console.error(error.message);
     }
-} catch (error) {
-    console.error(error)
 }
-})
+
 
 // updateBook 
 function openUpdateForm(book) {
-    console.log(`openUpdateForm book: ${book}`);
-    document.querySelector('#title').value = book.title
-    document.querySelector('#author').value = book.author
-    document.querySelector('#rating').value = book.rating
-    document.querySelector('#status').value = book.status
+    document.querySelector('#book-title').value = book.title;
+    document.querySelector('#book-author').value = book.author;
+    document.querySelector('#book-rating').value = book.rating;
+    document.querySelector('#book-status').value = book.status;
 
-    toggleModal()
+    toggleModal('update', book.id);
 }
 
-// Delete book
+
+// Delete Book Function 
 async function removeBook(bookId) {
-    console.log(`removeBook f(x): bookId = ${bookId}`);
     try {
         const res = await fetch(`api/books/${bookId}`, {
             method: 'DELETE',
-        })
+        });
+
         if (res.ok) {
-            location.reload()
+            const bookCard = document.querySelector(`#book-${bookId}`);
+            bookCard.remove(); // Remove the book card from the DOM
         } else {
-            console.log('Failed to remove book')
+            console.error('Failed to remove book');
         }
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
     }
 }
+
 
 //   displayBooks(books)

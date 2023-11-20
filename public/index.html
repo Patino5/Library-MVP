@@ -56,6 +56,65 @@
         </div>
     </div>
 
+    <!-- Add Book Form Modal -->
+<div class="modal" id="addBook">
+    <div class="modal-content">
+        <span class="close" onclick="toggleModal('addBook')">&times;</span>
+
+        <form id="addBookForm">
+            <label for="addTitle">Title:</label>
+            <input type="text" id="addTitle" required>
+
+            <label for="addAuthor">Author:</label>
+            <input type="text" id="addAuthor" required>
+
+            <label for="addRating">Rating:</label>
+            <input type="number" id="addRating" min="1" max="5" required>
+
+            <label for="addStatus">Status:</label>
+            <input type="text" id="addStatus" placeholder="read/unread" required>
+
+            <button type="button" onclick="submitForm('addBookForm', 'addBook')">Add Book</button>
+        </form>
+    </div>
+</div>
+
+<!-- Update Book Form Modal -->
+<div class="modal" id="updateBook">
+    <div class="modal-content">
+        <span class="close" onclick="toggleModal('updateBook')">&times;</span>
+
+        <form id="updateBookForm">
+            <label for="updateTitle">Title:</label>
+            <input type="text" id="updateTitle" required>
+
+            <label for="updateAuthor">Author:</label>
+            <input type="text" id="updateAuthor" required>
+
+            <label for="updateRating">Rating:</label>
+            <input type="number" id="updateRating" min="1" max="5" required>
+
+            <label for="updateStatus">Status:</label>
+            <input type="text" id="updateStatus" placeholder="read/unread" required>
+
+            <button type="button" onclick="submitForm('updateBookForm', 'updateBook')">Update Book</button>
+        </form>
+    </div>
+</div>
+
+<!-- Remove Book Form Modal -->
+<div class="modal" id="removeBook">
+    <div class="modal-content">
+        <span class="close" onclick="toggleModal('removeBook')">&times;</span>
+
+        <form id="removeBookForm">
+            <p>Are you sure you want to remove this book?</p>
+            <button type="button" onclick="submitForm('removeBookForm', 'removeBook')">Remove Book</button>
+        </form>
+    </div>
+</div>
+
+
     <!--   Main Section   -->
     <div class="display-books" id="books">
 
