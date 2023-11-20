@@ -134,12 +134,12 @@ addBookBtn.addEventListener('click', toggleModal)
 bookForm.addEventListener('submit', async function(event){
 event.preventDefault();
 const formData = {
-    title: document.querySelector('#title').value,
+    title: document.querySelector('#bookTitle').value,
     author: document.querySelector('#author').value,
     rating: document.querySelector('#rating').value,
     status: document.querySelector('#status').value
 }
-// const { title, author, rating, status } = formData;
+const { title, author, rating, status } = formData;
 console.log(formData);  
 try {
     const res = await fetch('https://personal-library-avc0.onrender.com/api/books/', {
