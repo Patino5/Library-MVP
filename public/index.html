@@ -30,7 +30,7 @@
     <!--   Add Book Form  -->
     <div class="modal" id="addBook">
         <div class="modal-content">
-            <span class="close" id="closeModalBtn">&times;</span>
+            <span class="close" onclick="toggleModal()" id="closeModalBtn">&times;</span>
 
             <form id="bookForm">
                 <label for="title">Title:</label>
@@ -45,7 +45,7 @@
                 <label for="status">Status:</label>
                 <input type="text" id="book-status" name="status" placeholder="read/unread">
                 
-                <button type="button" id="formSubmitBtn">Add Book</button>
+                <button type="button" id="formSubmitBtn" onclick="submitForm">Add Book</button>
             </form>
         </div>
     </div>
